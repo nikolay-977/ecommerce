@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ru.skillfactory.orderstatusservice";
+
+service OrderStatusService {
+    rpc CreateOrderStatus(CreateOrderStatusRequest) returns (OrderStatusResponse);
+    rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (OrderStatusResponse);
+    rpc GetOrderStatus(GetOrderStatusRequest) returns (OrderStatusResponse);
+}
+
+message CreateOrderStatusRequest {
+    string order_id = 1;
+    string user_id = 2;
+}
+
+message UpdateOrderStatusRequest {
+    string order_id = 1;
+    string status = 2;
+}
+
+message GetOrderStatusRequest {
+    string order_id = 1;
+}
+
+message OrderStatusResponse {
+    string order_id = 1;
+    string status = 2;
+}
+

@@ -1,0 +1,57 @@
+services:
+  user-service:
+    build:
+      context: user-service
+    ports:
+      - "50051:50051"
+    networks:
+      - grpc-network
+
+  order-processing-service:
+    build:
+      context: order-processing-service
+    ports:
+      - "50052:50052"
+    networks:
+      - grpc-network
+
+  order-status-service:
+    build:
+      context: order-status-service
+    ports:
+      - "50053:50053"
+    networks:
+      - grpc-network
+
+  payment-service:
+    build:
+      context: payment-service
+    ports:
+      - "50054:50054"
+    networks:
+      - grpc-network
+
+  review-service:
+    build:
+      context: review-service
+    ports:
+      - "50055:50055"
+    networks:
+      - grpc-network
+
+  grpc-client:
+    build:
+      context: grpc-client
+    depends_on:
+      - user-service
+      - order-processing-service
+      - order-status-service
+      - payment-service
+      - review-service
+    entrypoint: [ "sh", "-c", "sleep 10 && ./run_tests.sh" ]
+    networks:
+      - grpc-network
+
+networks:
+  grpc-network:
+    driver: bridge

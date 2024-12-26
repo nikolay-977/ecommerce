@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ru.skillfactory.paymentservice";
+
+service PaymentService {
+    rpc ProcessPayment(ProcessPaymentRequest) returns (PaymentResponse);
+}
+
+message ProcessPaymentRequest {
+    string order_id = 1;
+    string user_id = 2;
+    double amount = 3;
+}
+
+message PaymentResponse {
+    string payment_id = 1;
+    string order_id = 2;
+    bool success = 3;
+    string message = 4;
+}
