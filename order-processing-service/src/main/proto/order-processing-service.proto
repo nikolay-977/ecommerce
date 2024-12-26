@@ -23,5 +23,4 @@ message OrderResponse {
     string user_id = 2;
     string product_id = 3;
     int32 quantity = 4;
-    string status = 5;
 }
