@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ru.skillfactory.orderprocessingservice";
+
+service OrderProcessingService {
+    rpc CreateOrder(CreateOrderRequest) returns (OrderResponse);
+    rpc GetOrder(GetOrderRequest) returns (OrderResponse);
+}
+
+message CreateOrderRequest {
+    string user_id = 1;
+    string product_id = 2;
+    int32 quantity = 3;
+}
+
+message GetOrderRequest {
+    string order_id = 1;
+}
+
+message OrderResponse {
+    string order_id = 1;
+    string user_id = 2;
+    string product_id = 3;
+    int32 quantity = 4;
+    string status = 5;
+}
